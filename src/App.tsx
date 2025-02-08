@@ -3,6 +3,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {SnackbarProvider} from "notistack";
 import Modal from 'react-modal';
 import ArticlesPage from "./articles.tsx";
+import CategoriesPage from "./categories.tsx";
 
 Modal.setAppElement('#root');
 
@@ -22,6 +23,7 @@ function App() {
             <Routes>
                 <Route index path="/" element={def}/>
                 <Route path="/articles" element={<SnackbarWrapper><ArticlesPage/></SnackbarWrapper>}/>
+                <Route path="/categories" element={<SnackbarWrapper><CategoriesPage/></SnackbarWrapper>}/>
 
                 <Route path="*" element={def}/>
             </Routes>

@@ -9,7 +9,7 @@ export default function TopBar() {
     const navigate = useNavigate();
     const [currentModal, setCurrentModal] = useState(null as ("login" | "register" | null));
     const token = useAppStore((state) => state.token);
-    const setToken = useAppStore((state) => state.setToken);
+    const logOut = useAppStore((state) => state.logOut);
 
     return (
         <>
@@ -19,7 +19,7 @@ export default function TopBar() {
                     <div className="top-bar-search-login">
                         <input className="app-input" placeholder="Search..."/>
                         {token
-                            ? <button className="app-button" onClick={() => setToken(null)}>Logout</button>
+                            ? <button className="app-button" onClick={() => logOut()}>Logout</button>
                             : <button className="app-button" onClick={() => setCurrentModal("login")}>Login</button>}
                     </div>
                 </div>

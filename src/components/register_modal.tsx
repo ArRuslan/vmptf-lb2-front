@@ -9,6 +9,8 @@ interface RegisterModalProps {
 export default function RegisterModal({close, switchToLogin}: RegisterModalProps) {
     const [error, setError] = useState(null as (string | null));
     const setToken = useAppStore((state) => state.setToken);
+    const setUserId = useAppStore((state) => state.setUserId);
+    const setRole = useAppStore((state) => state.setRole);
 
     const register = (event: React.SyntheticEvent<HTMLFormElement>) => {
         setError(null);
@@ -39,6 +41,8 @@ export default function RegisterModal({close, switchToLogin}: RegisterModalProps
 
             if(result.token) {
                 setToken(result.token as string);
+                setUserId(result.user.id as number);
+                setRole(result.user.role as number);
                 close();
             }
 

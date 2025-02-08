@@ -9,6 +9,8 @@ interface LoginModalProps {
 export default function LoginModal({close, switchToRegister}: LoginModalProps) {
     const [error, setError] = useState(null as (string | null));
     const setToken = useAppStore((state) => state.setToken);
+    const setUserId = useAppStore((state) => state.setUserId);
+    const setRole = useAppStore((state) => state.setRole);
 
     const login = (event: React.SyntheticEvent<HTMLFormElement>) => {
         setError(null);
@@ -32,6 +34,8 @@ export default function LoginModal({close, switchToRegister}: LoginModalProps) {
 
             if(result.token) {
                 setToken(result.token as string);
+                setUserId(result.user.id as number);
+                setRole(result.user.role as number);
                 close();
             }
 

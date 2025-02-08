@@ -1,73 +1,49 @@
 import "./main.css";
-import {useEffect, useMemo, useState} from "react";
-import ArticleItem from "./components/article_item.tsx";
-import {Article} from "./entities.ts";
+import {useState} from "react";
+import {Category} from "./entities.ts";
 import InfiniteScroll from "react-infinite-scroll-component";
 import TopBar from "./components/top_bar.tsx";
 import {useAppStore} from "./state.ts";
 import Modal from "react-modal";
-import CreateArticleModal from "./components/create_article_modal.tsx";
-import {useLocation} from "react-router-dom";
+import CategoryItem from "./components/category_item.tsx";
+import CreateCategoryModal from "./components/create_category_modal.tsx";
 
-interface ArticlePaginationResult {
+interface CategoriesPaginationResult {
     count: number,
-    result: Article[],
+    result: Category[],
 }
 
-export default function ArticlesPage() {
+export default function CategoriesPage() {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    const [articles, setArticles] = useState([] as Article[]);
+    const [categories, setCategories] = useState([] as Category[]);
     const user_id = useAppStore(state => state.user_id);
+    const role = useAppStore(state => state.role);
     const [createOpen, setCreateOpen] = useState(false);
-    const {search} = useLocation();
-    const query = useMemo(
-        () => new URLSearchParams(search),
-        [search]
-    );
 
     const fetchData = () => {
-        /*if(query != oldQuery) {
-
-        }*/
-
         if (!hasMore) return;
-
-        let params = `page_size=10&page=${page}`;
-        if(query.has("category_id"))
-            params += `&category_id=${query.get("category_id")}`;
-        if(query.has("publisher_id"))
-            params += `&publisher_id=${query.get("publisher_id")}`;
-        if(query.has("title"))
-            params += `&title=${query.get("title")}`;
-
-        fetch(`http://127.0.0.1:3000/articles/search?${params}`).then(
+        fetch(`http://127.0.0.1:3000/categories?page_size=10&page=${page}`).then(
             response => response.json()
         ).then(json_ => {
-            const result = json_ as ArticlePaginationResult;
-            setHasMore((articles.length + result.result.length) < result.count)
-            setArticles([...articles, ...result.result]);
+            const result = json_ as CategoriesPaginationResult;
+            setHasMore((categories.length + result.result.length) < result.count)
+            setCategories([...categories, ...result.result]);
             setPage(page + 1);
         })
     }
 
     fetchData();
 
-    useEffect(() => {
-        setPage(1);
-        setHasMore(true);
-        setArticles([]);
-    }, [query]);
-
     return (
         <>
             <TopBar/>
             <div className="article-buttons">
-                {user_id !== null && <button className="app-button" onClick={() => setCreateOpen(true)}>New article</button>}
+                {user_id !== null && role >= 255 && <button className="app-button" onClick={() => setCreateOpen(true)}>New category</button>}
             </div>
             <div className="container article-list">
             <InfiniteScroll
-                    dataLength={articles.length}
+                    dataLength={categories.length}
                     next={fetchData}
                     hasMore={hasMore}
                     loader={<h4>Loading...</h4>}
@@ -77,8 +53,8 @@ export default function ArticlesPage() {
                         </p>
                     }
                 >
-                    {articles.map(article => (
-                        <ArticleItem article={article}></ArticleItem>
+                    {categories.map(category => (
+                        <CategoryItem category={category}></CategoryItem>
                     ))}
                 </InfiniteScroll>
 
@@ -98,7 +74,7 @@ export default function ArticlesPage() {
                     },
                 }}
             >
-                <CreateArticleModal close={() => setCreateOpen(false)}/>
+                <CreateCategoryModal close={() => setCreateOpen(false)}/>
             </Modal>
         </>
     )
