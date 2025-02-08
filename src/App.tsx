@@ -1,7 +1,10 @@
 import React from 'react'
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {SnackbarProvider} from "notistack";
+import Modal from 'react-modal';
 import ArticlesPage from "./articles.tsx";
+
+Modal.setAppElement('#root');
 
 function SnackbarWrapper({children}: {children: React.ReactNode}) {
     return (
