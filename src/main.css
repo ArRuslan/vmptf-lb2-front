@@ -51,6 +51,7 @@ h1 {
 .article-description {
     font-size: 16px;
     color: #555;
+    white-space: pre;
 }
 
 .article-date {
@@ -199,4 +200,42 @@ h1 {
 
 textarea.app-input {
     resize: none;
+}
+
+.comment-form {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 1em;
+}
+
+.comment-form > textarea, .comment-form > .app-button {
+    font-size: 1.1em;
+}
+
+.comments-container {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.comments-container > h2 {
+    margin: 0;
+}
+
+.comments-container > div > div > .article-item {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.article-buttons-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.article-buttons-inner > .app-button {
+    font-size: 1em;
 }

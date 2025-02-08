@@ -27,10 +27,6 @@ export default function ArticlesPage() {
     );
 
     const fetchData = () => {
-        /*if(query != oldQuery) {
-
-        }*/
-
         if (!hasMore) return;
 
         let params = `page_size=10&page=${page}`;
@@ -51,7 +47,9 @@ export default function ArticlesPage() {
         })
     }
 
-    fetchData();
+    useEffect(() => {
+        fetchData();
+    }, [page]);
 
     useEffect(() => {
         setPage(1);
@@ -66,7 +64,7 @@ export default function ArticlesPage() {
                 {user_id !== null && <button className="app-button" onClick={() => setCreateOpen(true)}>New article</button>}
             </div>
             <div className="container article-list">
-            <InfiniteScroll
+                <InfiniteScroll
                     dataLength={articles.length}
                     next={fetchData}
                     hasMore={hasMore}
@@ -78,10 +76,9 @@ export default function ArticlesPage() {
                     }
                 >
                     {articles.map(article => (
-                        <ArticleItem article={article}></ArticleItem>
+                        <ArticleItem article={article} fetchCommentsCount={true}></ArticleItem>
                     ))}
                 </InfiniteScroll>
-
             </div>
 
             <Modal
