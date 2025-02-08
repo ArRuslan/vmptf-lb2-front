@@ -1,0 +1,123 @@
+body, html, #root {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.article-list {
+    list-style: none;
+}
+
+.article-item {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.article-item:hover {
+    transform: scale(1.02);
+}
+
+.article-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.article-description {
+    font-size: 16px;
+    color: #555;
+}
+
+.article-date {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.article-author {
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 5px;
+}
+
+.top-bar {
+    background: #007bff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 48px;
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-inner {
+    width: 100%;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar-inner > a {
+    color: white;
+    text-decoration: none;
+}
+
+.top-bar-search-login {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.top-bar-search-login > input {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-bottom: 2px solid black;
+    font-size: 0.9em;
+    max-width: 192px;
+}
+
+.top-bar-search-login > input::placeholder {
+    color: wheat;
+}
+
+.top-bar-search-login > button {
+    background: #0052a9;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.75em;
+}
+
+.top-bar-search-login > button:hover {
+    background: #0067d2;
+    font-size: 0.8em;
+}
+
+.top-bar-search-login > button:active {
+    background: #0074ec;
+    font-size: 0.8em;
+}
