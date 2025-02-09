@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import React, {useState} from "react";
 import Modal from 'react-modal';
 import LoginModal from "./login_modal.tsx";
 import {useAppStore} from "../state.ts";
@@ -11,13 +11,20 @@ export default function TopBar() {
     const token = useAppStore((state) => state.token);
     const logOut = useAppStore((state) => state.logOut);
 
+    const search = (event: React.SyntheticEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        navigate(`/articles?title=${event.currentTarget.search_title.value}`);
+    }
+
     return (
         <>
             <div className="top-bar">
                 <div className="top-bar-inner">
                     <a href="#" onClick={() => navigate("/articles")}>Articles</a>
                     <div className="top-bar-search-login">
-                        <input className="app-input" placeholder="Search..."/>
+                        <form onSubmit={search}>
+                            <input className="app-input" placeholder="Search..." name="search_title" required={true}/>
+                        </form>
                         {token
                             ? <button className="app-button" onClick={() => logOut()}>Logout</button>
                             : <button className="app-button" onClick={() => setCurrentModal("login")}>Login</button>}
