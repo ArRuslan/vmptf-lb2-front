@@ -239,3 +239,12 @@ textarea.app-input {
 .article-buttons-inner > .app-button {
     font-size: 1em;
 }
+
+ul.react-autocomplete-input {
+    list-style: none;
+    left: 0!important;
+}
+
+ul.react-autocomplete-input > li {
+    left: 0;
+}
